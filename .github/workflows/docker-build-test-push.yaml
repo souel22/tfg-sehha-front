@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/*  # Adjust based on your branch naming convention
+      - feature/basic-frontend
   workflow_dispatch:
 
 jobs:
