@@ -1,0 +1,23 @@
+.contact-section {
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 50px 0; /* Padding for spacing */
+  }
+  
+  .contact-title {
+    color: #1574C4; /* Blue color for the title */
+    font-size: 2rem; /* Large font size */
+    font-weight: bold; /* Bold font */
+    margin-bottom: 20px; /* Margin below the title */
+  }
+  
+  .contact-subtitle {
+    color: #1574C4; /* Blue color for the subtitle */
+    font-size: 1.25rem; /* Medium font size */
+    margin-bottom: 30px; /* Margin below the subtitle */
+  }
+  
+  .contact-button {
+    font-size: 1.2rem; /* Increase button font size */
+    padding: 10px 20px; /* Padding inside the button */
+  }
+  

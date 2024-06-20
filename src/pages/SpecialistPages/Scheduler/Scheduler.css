@@ -1,0 +1,73 @@
+/* Color Palette */
+:root {
+  --primary-color: #1574C4; /* Blue */
+  --success-color: #35CE8D; /* Green */
+  --light-color: #FFFFFF; /* White */
+  --secondary-color: #928779; /* Grey */
+  --dark-color: #00171F; /* Dark Blue */
+  --danger-color: #dc3545; /* Red */
+}
+
+.scheduler {
+  background-color: var(--light-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.appointment-form {
+  background-color: var(--light-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-form .form-title {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.appointment-form .form-group label {
+  font-weight: bold;
+}
+
+.appointment-form .form-group input, .appointment-form .form-group select {
+  border-radius: 5px;
+}
+
+.appointment-form .btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.appointment-form .btn-primary:hover {
+  background-color: var(--dark-color);
+}
+
+.appointment-form .btn-secondary {
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.appointment-form .btn-secondary:hover {
+  background-color: var(--dark-color);
+}
+
+.error-message {
+  margin-top: 20px;
+}
+
+button[aria-controls="calendar-collapse-text"] {
+  margin-top: 20px;
+}
+
+#calendar-collapse-text {
+  margin-top: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,10 @@
+.consultation-header {
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333; /* Dark text color */
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: bold; /* Bold text */
+    padding: 20px; /* Add some padding */
+    text-align: center; /* Center the text */
+    border-bottom: 2px solid #dee2e6; /* Light grey bottom border */
+  }
+  

@@ -1,0 +1,57 @@
+.custom-navbar {
+  background-color: #FFFFFF !important; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 10px 0;
+}
+
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1574C4; /* Blue color for the brand name */
+}
+
+.custom-navbar .navbar-brand img {
+  height: 40px;
+  width: auto;
+}
+
+.custom-navbar .page-title {
+  color: #1574C4; /* Blue color for the title */
+  font-size: 1.25rem; /* Large font size */
+  font-weight: bold; /* Bold font */
+  margin: 0 auto; /* Center the title */
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.appointments-button {
+  background-color: #1574C4 !important; /* Blue background */
+  border-color: #1574C4 !important; /* Blue border */
+  color: #FFFFFF !important; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.appointments-button:hover {
+  background-color: #005bb5 !important; /* Darker blue on hover */
+  border-color: #005bb5 !important; /* Darker blue border on hover */
+}
+
+.logout-button {
+  background-color: #928779 !important; /* Light Grey background */
+  border-color: #928779 !important; /* Light Grey border */
+  color: #FFFFFF !important; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #746d63 !important; /* Darker grey on hover */
+  border-color: #746d63 !important; /* Darker grey border on hover */
+}

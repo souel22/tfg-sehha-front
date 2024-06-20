@@ -1,0 +1,74 @@
+/* Color Palette */
+:root {
+  --primary-color: #1574C4; /* Blue */
+  --success-color: #35CE8D; /* Green */
+  --light-color: #FFFFFF; /* White */
+  --secondary-color: #928779; /* Grey */
+  --dark-color: #00171F; /* Dark Blue */
+  --danger-color: #dc3545; /* Red */
+}
+
+/* Specialist Calendar Styles */
+.specialist-calendar-container {
+  padding: 20px;
+  background-color: var(--light-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  min-height: 700px; /* Ensure minimum height for better visibility */
+}
+
+.calendar-wrapper {
+  height: calc(100vh - 160px); /* Adjust based on the total height of the container */
+  width: 100%;
+}
+
+.rbc-calendar {
+  font-size: 14px;
+}
+
+.rbc-toolbar {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.rbc-toolbar button {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.rbc-toolbar button:hover {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+}
+
+.rbc-event {
+  background-color: var(--success-color);
+  border: none;
+  color: var(--light-color);
+  padding: 2px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.rbc-event-booked {
+  background-color: var(--danger-color);
+  border: none;
+  color: var(--light-color);
+  padding: 2px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}

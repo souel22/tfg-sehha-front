@@ -1,0 +1,61 @@
+/* Color Palette */
+:root {
+    --primary-color: #1574C4; /* Blue */
+    --success-color: #35CE8D; /* Green */
+    --light-color: #FFFFFF; /* White */
+    --secondary-color: #928779; /* Grey */
+    --dark-color: #00171F; /* Dark Blue */
+  }
+  
+  /* General Styles */
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Specialist Card Styles */
+  .specialist-card {
+    background-color: var(--light-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+  }
+  
+  .specialist-card .specialist-name {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .specialist-card .specialty-select {
+    border: 1px solid var(--primary-color);
+    color: var(--dark-color);
+  }
+  
+  /* Container styles */
+  .container {
+    padding-top: 20px;
+  }
+  
+  /* Row styles */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  /* Column styles */
+  .col-md-6, .col-lg-4 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  

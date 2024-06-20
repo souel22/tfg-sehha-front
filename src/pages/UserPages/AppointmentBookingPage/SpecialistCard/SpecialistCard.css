@@ -1,0 +1,39 @@
+.specialist-card {
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.profile-image {
+  border: 3px solid var(--primary-color);
+}
+
+.specialist-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.specialty-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.specialty-select {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.specialist-calendar {
+  margin-top: 1rem;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 10px 10px;
+}
+

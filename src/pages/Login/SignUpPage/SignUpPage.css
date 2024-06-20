@@ -1,0 +1,36 @@
+.signup-page {
+    background: url('/public/images/login-background-image.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .signup-card {
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-card h2 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .signup-input {
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .signup-button {
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .text-center a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .text-center a:hover {
+    text-decoration: underline;
+  }
+  

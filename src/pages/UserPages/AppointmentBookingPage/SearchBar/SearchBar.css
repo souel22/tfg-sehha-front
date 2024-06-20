@@ -1,0 +1,29 @@
+.search-bar {
+  background-color: #f8f9fa; /* Light grey background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 20px; /* Padding for spacing */
+}
+
+.search-bar .form-group label {
+  color: #1574C4; /* Blue color for labels */
+  font-weight: bold; /* Bold font for labels */
+}
+
+.search-bar .form-control {
+  border-color: #1574C4; /* Blue border for inputs */
+}
+
+.search-bar .search-button {
+  background-color: #1574C4 !important; /* Blue background */
+  border-color: #1574C4 !important; /* Blue border */
+  color: #FFFFFF !important; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search-bar .search-button:hover {
+  background-color: #005bb5 !important; /* Darker blue on hover */
+  border-color: #005bb5 !important; /* Darker blue border on hover */
+}

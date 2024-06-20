@@ -1,0 +1,47 @@
+/* Color Palette */
+:root {
+  --primary-color: #1574C4; /* Blue */
+  --success-color: #35CE8D; /* Green */
+  --light-color: #FFFFFF; /* White */
+  --secondary-color: #928779; /* Grey */
+  --dark-color: #00171F; /* Dark Blue */
+  --danger-color: #FF0000; /* Red */
+}
+
+/* Appointment Card Styles */
+.appointment-card {
+  background-color: var(--light-color);
+}
+
+/* Specialty Title */
+.specialty-title {
+  color: var(--primary-color);
+}
+
+/* Doctor Subtitle */
+.doctor-subtitle {
+  color: var(--secondary-color);
+}
+
+/* Appointment Date and Time */
+.appointment-date,
+.appointment-time {
+  color: var(--dark-color);
+}
+
+/* Button Styles */
+button.mb-2 {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+button.mb-2:hover {
+  background-color: var(--dark-color);
+}
+
+.canceled-button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--light-color);
+  cursor: not-allowed;
+}

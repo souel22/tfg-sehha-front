@@ -1,0 +1,39 @@
+.custom-navbar {
+    background-color: var(--light-color);
+    border-bottom: 1px solid var(--primary-color);
+    padding: 10px 0;
+  }
+  
+  .custom-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-navbar .navbar-brand span {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-left: 10px;
+  }
+  
+  .custom-navbar .page-title {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+  }
+  
+  .custom-navbar .nav-buttons .appointments-button {
+    background-color: var(--primary-color);
+    border: none;
+  }
+  
+  .custom-navbar .nav-buttons .appointments-button:hover {
+    background-color: var(--dark-color);
+  }
+  
+  .custom-navbar .nav-buttons .logout-button {
+    border-color: var(--primary-color);
+  }
+  
+  .custom-navbar .nav-buttons .logout-button:hover {
+    background-color: var(--secondary-color);
+  }
+  

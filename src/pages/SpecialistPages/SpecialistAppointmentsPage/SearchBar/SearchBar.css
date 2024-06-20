@@ -1,0 +1,22 @@
+.search-bar {
+    background-color: var(--light-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .search-bar .search-button {
+    background-color: var(--primary-color);
+    border: none;
+    width: 100%;
+  }
+  
+  .search-bar .search-button:hover {
+    background-color: var(--dark-color);
+  }
+  

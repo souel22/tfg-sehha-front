@@ -1,0 +1,42 @@
+/* Color Palette */
+:root {
+    --primary-color: #1574C4; /* Blue */
+    --success-color: #35CE8D; /* Green */
+    --light-color: #FFFFFF; /* White */
+    --secondary-color: #928779; /* Grey */
+    --dark-color: #00171F; /* Dark Blue */
+    --danger-color: #dc3545; /* Red */
+  }
+  
+  .consultation-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--light-color);
+  }
+  
+  .video-stream {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .container {
+    flex: 1;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .spinner-border {
+    margin-top: 20%;
+  }
+  
+  header, footer {
+    flex-shrink: 0;
+  }
+  

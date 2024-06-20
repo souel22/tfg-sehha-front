@@ -1,0 +1,22 @@
+.appointment-list {
+    background-color: #f8f9fa; /* Light grey background */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Padding for spacing */
+  }
+  
+  .appointment-list .appointment-item {
+    margin-bottom: 20px; /* Space between items */
+  }
+  
+  /* AppointmentsPage.css */
+
+.no-appointments-message {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #777;
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}

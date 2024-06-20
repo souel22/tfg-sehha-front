@@ -1,0 +1,60 @@
+.custom-navbar {
+  background-color: #FFFFFF !important; /* White background */
+}
+
+.custom-navbar .navbar-brand img {
+  height: 40px;
+  width: auto;
+}
+
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.custom-navbar .nav-link, .custom-navbar .nav-dropdown {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  color: #928779 !important; /* Light Grey text */
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.custom-navbar .nav-link:hover, .custom-navbar .nav-dropdown:hover {
+  color: #35CE8D !important; /* Green on hover */
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1); /* Light border for toggle button */
+}
+
+.custom-navbar .navbar-collapse {
+  justify-content: flex-end; /* Align links to the right */
+}
+
+.custom-signin-button {
+  background-color: #1574C4 !important; /* Blue background */
+  border-color: #1574C4 !important; /* Blue border */
+  color: #FFFFFF !important; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.custom-signin-button:hover {
+  background-color: #005bb5 !important; /* Darker blue on hover */
+  border-color: #005bb5 !important; /* Darker blue border on hover */
+}
+
+.custom-login-button {
+  background-color: #928779 !important; /* Light Grey background */
+  border-color: #928779 !important; /* Light Grey border */
+  color: #FFFFFF !important; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.custom-login-button:hover {
+  background-color: #746d63 !important; /* Darker grey on hover */
+  border-color: #746d63 !important; /* Darker grey border on hover */
+}

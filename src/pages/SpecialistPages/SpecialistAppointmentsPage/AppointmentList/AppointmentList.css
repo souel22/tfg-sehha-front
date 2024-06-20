@@ -1,0 +1,55 @@
+/* Color Palette */
+:root {
+    --primary-color: #1574C4; /* Blue */
+    --success-color: #35CE8D; /* Green */
+    --light-color: #FFFFFF; /* White */
+    --secondary-color: #928779; /* Grey */
+    --dark-color: #00171F; /* Dark Blue */
+    --danger-color: #dc3545; /* Red */
+  }
+  
+  /* Appointment Item Styles */
+  .appointment-item {
+    background-color: var(--light-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .appointment-item .specialty {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+  }
+  
+  .appointment-item .user-name {
+    color: var(--secondary-color);
+  }
+  
+  .appointment-item .appointment-time {
+    margin-bottom: 15px;
+  }
+  
+  .appointment-item .appointment-actions .btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+  }
+  
+  .appointment-item .appointment-actions .btn-primary:hover {
+    background-color: var(--dark-color);
+  }
+  
+  .appointment-item .appointment-actions .btn-danger {
+    background-color: var(--danger-color);
+    border: none;
+  }
+  
+  .appointment-item .appointment-actions .btn-danger:hover {
+    background-color: var(--dark-color);
+  }
+  
+  .appointment-item .appointment-actions .btn-secondary {
+    background-color: var(--secondary-color);
+    border: none;
+    cursor: not-allowed;
+  }
+  

@@ -1,0 +1,19 @@
+.hero-section {
+    background-color: #FFFFFF; /* White background */
+    padding: 100px 0; /* Add padding for spacing */
+  }
+  
+  .hero-title {
+    color: #1574C4; /* Blue color for the heading */
+    font-size: 3rem; /* Large font size */
+    font-weight: bold; /* Bold font */
+    
+  }
+  
+  .hero-subtitle {
+    color: #1574C4; /* Blue color for the subtitle */
+    font-size: 1.25rem; /* Medium font size */
+    margin-top: 1rem; /* Space above the subtitle */
+    line-height: 1.5; /* Increase line height for readability */
+  }
+  

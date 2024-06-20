@@ -1,0 +1,15 @@
+.feature-section {
+    background-color: #FFFFFF; /* White background */
+  }
+  
+  .feature-text {
+    color: #1574C4; /* Blue color for the text */
+    font-size: 2.5rem; /* Medium font size */
+    margin: 1rem 0; /* Margin around the text */
+  }
+  
+  .feature-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
