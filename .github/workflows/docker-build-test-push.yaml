@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/*  # Adjust based on your branch naming convention
+      - feature/basic-frontend
   workflow_dispatch:
 
 jobs:
@@ -31,35 +31,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-react-vite-app:latest
-
-      - name: Run container for testing
-        run: docker run -d -p 8080:80 --name test-container ${{ secrets.DOCKER_USERNAME }}/my-react-vite-app:latest
-
-      - name: Wait for the container to be up
-        run: |
-          echo "Waiting for the container to be up..."
-          retries=0
-          max_retries=30
-          while ! curl -fs http://localhost:8080 > /dev/null; do
-            if [ $retries -eq $max_retries ]; then
-              echo "Max retries reached. Container is not responding."
-              docker logs test-container
-              exit 1
-            fi
-            echo "Waiting for the container... ($retries/$max_retries)"
-            retries=$((retries + 1))
-            sleep 2
-          done
-          echo "Container is up and running."
-
-      - name: Test the container
-        run: |
-          curl -f http://localhost:8080 || (docker logs test-container && exit 1)
-
-      - name: Stop and remove the container
-        run: docker rm -f test-container
-
+          platforms: linux/amd64, linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/sehha-frontend:latest
       - name: Push Docker image to Docker Hub
         if: success()
         uses: docker/build-push-action@v4
@@ -67,4 +40,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-react-vite-app:latest
+          platforms: linux/amd64, linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/sehha-frontend:latest
