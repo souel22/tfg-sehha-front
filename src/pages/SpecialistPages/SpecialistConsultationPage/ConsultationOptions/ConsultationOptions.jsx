@@ -141,7 +141,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
   useEffect(() => {
     if (authenticatedUser) {
       setToken(authenticatedUser.token);
-      console.log('Authenticated user token:', token);
+      console.log('Authenticated user token:', authenticatedUser.token);
 
       console.log('Component mounted');
 
@@ -155,7 +155,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
         switch (e.type) {
           case 'offer':
             console.log('Handling offer');
-            handleOffer(e, socket, remoteVideo, appointmentId, token);
+            handleOffer(e, socket, remoteVideo, appointmentId, authenticatedUser.token);
             break;
           case 'answer':
             console.log('Handling answer');
@@ -173,7 +173,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
               return;
             }
             console.log('Calling makeCall with appointmentId:', e.appointmentId);
-            makeCall(appointmentId, socket, remoteVideo, token);  // Corrected this line to use appointmentId directly
+            makeCall(appointmentId, socket, remoteVideo, authenticatedUser.token);  // Corrected this line to use appointmentId directly
             break;
           case 'bye':
             console.log('Handling bye');
@@ -207,7 +207,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     handleStartButtonutton.current.disabled = true;
     hangupButton.current.disabled = false;
     muteAudButton.current.disabled = false;
-    const message = { type: 'ready', token, room: appointmentId };
+    const message = { type: 'ready', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending ready:', message);
     socket.emit('message', message);
   };
@@ -215,7 +215,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
   const handleHangUpButton = async () => {
     console.log('Hanging up call');
     hangup();
-    const message = { type: 'bye', token, room: appointmentId };
+    const message = { type: 'bye', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending bye:', message);
     socket.emit('message', message);
   };
