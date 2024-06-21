@@ -56,7 +56,7 @@ const ConsultationPage = () => {
         }
       };
 
-      const newSocket = io(import.meta.env.VITE_REACT_APP_VIDEO_MICRO, { transports: ['websocket'] });
+      const newSocket = io(import.meta.env.VITE_REACT_APP_VIDEO_MICRO);
       setSocket(newSocket);
 
       console.log("socket", newSocket);
