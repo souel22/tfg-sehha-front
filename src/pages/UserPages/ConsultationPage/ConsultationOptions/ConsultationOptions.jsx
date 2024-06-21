@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { FiVideo, FiVideoOff, FiMic, FiMicOff } from 'react-icons/fi';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useAuthContext } from '../../../../hooks/useAuthContext';  
+import { useAuthContext } from '../../../../hooks/useAuthContext';
 import './ConsultationOptions.css';
 
 const servers = {
@@ -30,7 +30,7 @@ async function makeCall(appointmentId, socket, remoteVideo, token) {
         candidate: e.candidate ? e.candidate.candidate : null,
         sdpMid: e.candidate ? e.candidate.sdpMid : null,
         sdpMLineIndex: e.candidate ? e.candidate.sdpMLineIndex : null,
-        token, 
+        token,
         room: appointmentId
       };
       console.log('Sending ICE candidate:', message);
@@ -135,58 +135,63 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
   const muteVidButton = useRef(null);
   const localVideo = useRef(null);
   const remoteVideo = useRef(null);
-  const { user: authenticatedUser, token } = useAuthContext();  // Access the authenticated user
-
+  const { user: authenticatedUser } = useAuthContext();  // Access the authenticated user
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    console.log('Component mounted');
+    if (authenticatedUser) {
+      setToken(authenticatedUser.token);
+      console.log('Authenticated user token:', token);
 
-    socket.on('message', e => {
-      console.log('Received message:', e);
-      if (!localStream) {
-        console.log('Not ready yet');
-        return;
-      }
-      console.log('Current appointmentId:', appointmentId);
-      switch (e.type) {
-        case 'offer':
-          console.log('Handling offer');
-          handleOffer(e, socket, remoteVideo, appointmentId, token);
-          break;
-        case 'answer':
-          console.log('Handling answer');
-          handleAnswer(e, appointmentId);
-          break;
-        case 'candidate':
-          console.log('Handling candidate');
-          handleCandidate(e, appointmentId);
-          break;
-        case 'create-room':
-        case 'join-room':
-          console.log('Room created or joined');
-          if (pc) {
-            console.log('Already in call, ignoring');
-            return;
-          }
-          console.log('Calling makeCall with appointmentId:', e.appointmentId);
-          makeCall(appointmentId, socket, remoteVideo, token);  // Corrected this line to use appointmentId directly
-          break;
-        case 'bye':
-          console.log('Handling bye');
-          if (pc) {
-            hangup();
-          }
-          break;
-        default:
-          console.log('Unhandled message type:', e);
-          break;
-      }
-    });
+      console.log('Component mounted');
 
-    hangupButton.current.disabled = true;
-    muteAudButton.current.disabled = true;
+      socket.on('message', e => {
+        console.log('Received message:', e);
+        if (!localStream) {
+          console.log('Not ready yet');
+          return;
+        }
+        console.log('Current appointmentId:', appointmentId);
+        switch (e.type) {
+          case 'offer':
+            console.log('Handling offer');
+            handleOffer(e, socket, remoteVideo, appointmentId, token);
+            break;
+          case 'answer':
+            console.log('Handling answer');
+            handleAnswer(e, appointmentId);
+            break;
+          case 'candidate':
+            console.log('Handling candidate');
+            handleCandidate(e, appointmentId);
+            break;
+          case 'create-room':
+          case 'join-room':
+            console.log('Room created or joined');
+            if (pc) {
+              console.log('Already in call, ignoring');
+              return;
+            }
+            console.log('Calling makeCall with appointmentId:', e.appointmentId);
+            makeCall(appointmentId, socket, remoteVideo, token);  // Corrected this line to use appointmentId directly
+            break;
+          case 'bye':
+            console.log('Handling bye');
+            if (pc) {
+              hangup();
+            }
+            break;
+          default:
+            console.log('Unhandled message type:', e);
+            break;
+        }
+      });
 
-  }, [appointmentId, userId, specialistId, socket]);
+      hangupButton.current.disabled = true;
+      muteAudButton.current.disabled = true;
+    }
+
+  }, [appointmentId, userId, specialistId, socket, authenticatedUser]);
 
   const [audiostate, setAudio] = useState(false);
   const [videostate, setVideo] = useState(false);
