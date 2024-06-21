@@ -8,6 +8,7 @@ import './SpecialistConsultationPage.css';
 import { useLocation } from 'react-router-dom';
 import { useLogout } from '../../../hooks/useLogout';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import axios from 'axios';
 
 
 function useQuery() {
@@ -17,39 +18,61 @@ function useQuery() {
 const SpecialistConsultationPage = () => {
   const query = useQuery();
   const [socket, setSocket] = useState(null);
+  const [user, setUser] = useState(null);
   const [specialist, setSpecialist] = useState(null);
-  const userId = query.get('user');
-  const specialistId = query.get('specialist');
+  const [speciality, setSpeciality] = useState(null);
 
   const appointmentId = query.get('appointment');
+  const userId = query.get('user');
+  const specialistId = query.get('specialist');
+  const { logout } = useLogout();
   const { user: authenticatedUser } = useAuthContext();
-  const logout = useLogout();
 
   useEffect(() => {
-    if (authenticatedUser && authenticatedUser.specialist) {
-      setSpecialist(authenticatedUser.specialist);
-      console.log("authenticatedUser specialist: ", authenticatedUser);
+    if (authenticatedUser) {
+      console.log("authenticatedUser", authenticatedUser);
+      setUser(authenticatedUser.user);
+
+      const fetchAppointment = async () => {
+        try {
+          const path = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_APPOINTMENT_PATH.replace("<appointmentId>", appointmentId);
+          const url = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_URL + path;
+
+          const { data } = await axios.get(url, 
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authenticatedUser.token}`
+              },
+            }
+          );
+          console.log("data.user", data.user);
+          console.log("data.specialist", data.specialist);
+          console.log("data.speciality", data.speciality);
+          setUser(data.user);
+          setSpecialist(data.specialist);
+          setSpeciality(data.speciality);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+
       const newSocket = io(import.meta.env.VITE_REACT_APP_VIDEO_MICRO, { transports: ['websocket'] });
-    setSocket(newSocket);
+      setSocket(newSocket);
 
-    console.log("socket", newSocket);
-    window.scrollTo(0, 0);
+      console.log("socket", newSocket);
+      window.scrollTo(0, 0);
+      fetchAppointment();
 
-    return () => {
-      console.log('Disconnecting socket...');
-      newSocket.disconnect();
-    };
+      return () => {
+        console.log('Disconnecting socket...');
+        newSocket.disconnect();
+      };
     }
-    
-  }, [authenticatedUser]);
+  }, [authenticatedUser, appointmentId]);
 
-  const handleScheduleAppointment = () => {
-    const url = import.meta.env.VITE_REACT_APP_SPECIALIST_SCHEDULE_APPOINTMENT_URL;
-    if (url) {
-      window.location.href = url;
-    } else {
-      console.error('Schedule appointment URL is not defined.');
-    }
+  const handleSchedule = () => {
+    window.location.href = import.meta.env.VITE_REACT_APP_SPECIALIST_SCHEDULE_APPOINTMENT_URL;
   };
 
   const handleAppointments = () => {
@@ -57,20 +80,31 @@ const SpecialistConsultationPage = () => {
   };
 
   const handleLogout = () => {
-    logout()
+    logout();
   };
-
 
   return (
     <div className="consultation-page">
       <Header 
-        onScheduleAppointment={handleScheduleAppointment} 
+        onSchedule={handleSchedule} 
+        onAppointments={handleAppointments} 
         onLogout={handleLogout} 
-        onAppointments={handleAppointments}
-        specialist={specialist ? `Dr. ${specialist.firstName} ${specialist.lastName}` : ""} 
-      />      
-      <ConsultationHeader specialty="Specialty" doctorName="Name Surname" />
-      {socket && <ConsultationOptions userId={userId} specialistId={specialistId} appointmentId={appointmentId} socket={socket} />}
+        specialist={specialist ? `Dr. ${specialist.firstName} ${specialist.lastName}` : ''} 
+      />
+      {speciality && specialist && (
+        <ConsultationHeader 
+          specialty={speciality ? speciality.name : ""} 
+          user={user ? `${user.firstName} ${user.lastName}` : ""} 
+        />
+      )}
+      {socket && (
+        <ConsultationOptions 
+          userId={userId} 
+          specialistId={specialistId} 
+          appointmentId={appointmentId} 
+          socket={socket} 
+        />
+      )}
       <Footer />
     </div>
   );

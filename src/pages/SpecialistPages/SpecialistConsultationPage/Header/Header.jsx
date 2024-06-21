@@ -3,7 +3,7 @@ import { Navbar, Container, Button, Nav } from 'react-bootstrap';
 import './Header.css';  // Import the custom CSS
 
 // Header Component
-const Header = ({onReserve, onAppointments, onLogout, client}) => {
+const Header = ({onSchedule, onAppointments, onLogout, specialist}) => {
   return (
     <Navbar expand="lg" className="custom-navbar">
       <Container>
@@ -19,9 +19,9 @@ const Header = ({onReserve, onAppointments, onLogout, client}) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto d-flex align-items-center w-100 justify-content-between">
-            <div className="page-title mx-auto">{client}</div>
+            <div className="page-title mx-auto">{specialist}</div>
             <div className="nav-buttons d-flex">
-              <Button variant="primary" className="appointments-button mx-2" onClick={onReserve}>RESERVE</Button>
+              <Button variant="primary" className="appointments-button mx-2" onClick={onSchedule}>SCHEDULE</Button>
               <Button variant="primary" className="appointments-button mx-2" onClick={onAppointments}>APPOINTMENTS</Button>
               <Button variant="outline-secondary" className="logout-button mx-2" onClick={onLogout}>LOG OUT</Button>
             </div>

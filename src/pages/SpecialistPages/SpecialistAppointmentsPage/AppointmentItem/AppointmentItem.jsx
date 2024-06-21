@@ -5,10 +5,6 @@ import './AppointmentItem.css';
 // AppointmentItem Component
 const AppointmentItem = ({ appointmentId, specialty, userName, date, duration, status, onJoin, onCancel }) => {
 
-  // Handle the cancel button click event
-  const handleCancelClick = (appointmentId) => {
-    onCancel(appointmentId);
-  };
 
   // Handle the join button click event
   const handleJoinClick = (appointmentId) => {
@@ -32,13 +28,6 @@ const AppointmentItem = ({ appointmentId, specialty, userName, date, duration, s
               Join
             </Button>
           )}
-          <Button
-            variant={status === 'cancelled' ? 'secondary' : 'danger'}
-            onClick={status === 'cancelled' ? "" : () => handleCancelClick(appointmentId)}
-            disabled={status === 'cancelled'}
-          >
-            {status === 'cancelled' ? 'Cancelled' : 'Cancel'}
-          </Button>
         </div>
       </Card.Body>
     </Card>

@@ -25,30 +25,29 @@ const Scheduler = () => {
   const baseUrl = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_URL;
 
   useEffect(() => {
-
     if (authenticatedUser) {
-      console.log("Authenticated user", authenticatedUser)
-      setSpecialist(authenticatedUser.specialist)
-      console.log("Specialist", specialist)
-      const fetchData = async () => {
+      setSpecialist(authenticatedUser.specialist);
+    }
+  }, [authenticatedUser]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (specialist && specialist.id) {
         try {
           const path = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_SPECIALIST_PATH.replace("<specialistId>", specialist.id);
           const url = baseUrl + path;
-
-          const response = await axios.get(url, 
-            {
-              headers: { Authorization: `Bearer ${authenticatedUser.token}` }
-            }
-          );
+          const response = await axios.get(url, {
+            headers: { Authorization: `Bearer ${authenticatedUser.token}` }
+          });
           setSpecialistName(response.data.name);
         } catch (e) {
           console.error("There was an error fetching the specialist info", e);
         }
-      };
+      }
+    };
 
-      fetchData();
-    }
-  }, [authenticatedUser, baseUrl, specialist]);
+    fetchData();
+  }, [specialist, baseUrl, authenticatedUser]);
 
   const onSubmit = async (data) => {
     const { date, hour, duration, recurrenceType, numberOfSlots, recurrence } = data;

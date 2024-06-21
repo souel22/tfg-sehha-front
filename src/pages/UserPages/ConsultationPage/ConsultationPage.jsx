@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { useLogout } from '../../../hooks/useLogout';
 import { useAuthContext } from "../../../hooks/useAuthContext";
-
 import './ConsultationPage.css';
 import { useLocation } from 'react-router-dom';
 
@@ -19,6 +18,8 @@ const ConsultationPage = () => {
   const query = useQuery();
   const [socket, setSocket] = useState(null);
   const [user, setUser] = useState(null);
+  const [specialist, setSpecialist] = useState(null);
+  const [speciality, setSpeciality] = useState(null);
 
   const appointmentId = query.get('appointment');
   const userId = query.get('user');
@@ -44,8 +45,12 @@ const ConsultationPage = () => {
               },
             }
           );
-
+          console.log("data.user", data.user);
+          console.log("data.specialist", data.specialist);
+          console.log("data.speciality", data.speciality);
           setUser(data.user);
+          setSpecialist(data.specialist);
+          setSpeciality(data.speciality);
         } catch (e) {
           console.log(e);
         }
@@ -85,8 +90,20 @@ const ConsultationPage = () => {
         onLogout={handleLogout} 
         client={user ? `${user.firstName} ${user.lastName}` : ''} 
       />
-      <ConsultationHeader specialty="Specialty" doctorName="Name Surname" />
-      {socket && <ConsultationOptions userId={userId} specialistId={specialistId} appointmentId={appointmentId} socket={socket} />}
+      {speciality && specialist && (
+        <ConsultationHeader 
+          specialty={speciality.name} 
+          doctorName={`${specialist.firstName} ${specialist.lastName}`} 
+        />
+      )}
+      {socket && (
+        <ConsultationOptions 
+          userId={userId} 
+          specialistId={specialistId} 
+          appointmentId={appointmentId} 
+          socket={socket} 
+        />
+      )}
       <Footer />
     </div>
   );

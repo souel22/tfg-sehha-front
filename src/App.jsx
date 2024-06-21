@@ -14,7 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuthContext } from './hooks/useAuthContext';
 import validateToken from './utils/validateToken';
 import { useLogout } from './hooks/useLogout';
-import './App.css'
 
 const App = () => {
   const { user: authenticatedUser } = useAuthContext();
