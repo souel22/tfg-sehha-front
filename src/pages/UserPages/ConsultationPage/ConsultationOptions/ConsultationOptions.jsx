@@ -196,10 +196,8 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
         }
       });
 
-      hangupButton.current.disabled = true;
       muteAudButton.current.disabled = true;
       muteVidButton.current.disabled = true;
-      startButton.current.disabled = false;
     }
 
   }, [appointmentId, userId, specialistId, socket, authenticatedUser]);
@@ -215,8 +213,6 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     const message = { type: 'ready', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending ready:', message);
     socket.emit('message', message);
-        startButton.current.disabled = true;
-    hangupButton.current.disabled = false;
     muteAudButton.current.disabled = false;
     muteVidButton.current.disabled = false;
     setStarted(true)
@@ -228,11 +224,9 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     const message = { type: 'bye', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending bye:', message);
     socket.emit('message', message);
-    startButton.current.disabled = false;
-    hangupButton.current.disabled = true;
     muteAudButton.current.disabled = true;
     muteVidButton.current.disabled = true;
-    if (localVideo.current.classList.contains('big-video')){
+    if (localVideo.current.classList.contains('big-video')) {
       localVideo.current.classList.remove('big-video');
       localVideo.current.classList.add('small-video');
       remoteVideo.current.classList.remove('small-video');
@@ -285,8 +279,9 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
           <video ref={remoteVideo} className='video-item big-video' autoPlay playsInline onClick={started ? toggleVideos : () => { console.log("not started") }}></video>
           <video ref={localVideo} className='video-item small-video' autoPlay playsInline muted onClick={started ? toggleVideos : () => { console.log("not started") }}></video>
           <div className="btns-container d-flex justify-content-center">
-            <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>
-            <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button>
+
+            {started ? <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button> : 
+            <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>}
             {videostate ?
               <Button className='btn-start' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
               <Button className='btn-end' ref={muteVidButton} onClick={muteVideo}><FiVideoOff /></Button>}
