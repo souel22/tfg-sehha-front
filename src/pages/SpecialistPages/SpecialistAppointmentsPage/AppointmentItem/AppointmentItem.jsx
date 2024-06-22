@@ -23,11 +23,15 @@ const AppointmentItem = ({ appointmentId, specialty, userName, date, duration, s
           <div className="duration">Duration: {duration}</div>
         </div>
         <div className="appointment-actions d-flex flex-column">
-          {status !== 'cancelled' && (
+          {status !== 'cancelled' ?
             <Button variant="primary" onClick={() => handleJoinClick(appointmentId)} className="mb-2">
               Join
             </Button>
-          )}
+           : 
+          <Button variant="secondary" className="mb-2">
+            Cancelled
+          </Button>
+          }
         </div>
       </Card.Body>
     </Card>

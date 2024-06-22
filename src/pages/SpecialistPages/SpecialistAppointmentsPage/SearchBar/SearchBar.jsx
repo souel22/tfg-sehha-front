@@ -11,6 +11,7 @@ const SearchBar = ({ onFilter, specialities, users }) => {
     onFilter(data);
   };
 
+  console.log("Specialities: ", specialities);
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="search-bar">
       <Row className="align-items-end">

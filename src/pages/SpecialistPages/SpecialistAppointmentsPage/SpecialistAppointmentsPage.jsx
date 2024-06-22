@@ -22,6 +22,7 @@ const SpecialistAppointmentsPage = () => {
     const fetchAppointments = async () => {
       if (authenticatedUser && authenticatedUser.specialist) {
         setSpecialist(authenticatedUser.specialist);
+         console.log("specialist: ", authenticatedUser.specialist); 
         try {
           const path = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_APPOINTMENTS_PATH;
 
@@ -37,7 +38,12 @@ const SpecialistAppointmentsPage = () => {
 
             if (response.data) {
               setAppointments(response.data); // Assuming the API returns an array of appointments
-              setUsers(response.data.map(appointment => appointment.user));
+              const uniqueUsers = Array.from(new Set(response.data.map(appointment => appointment.user._id)))
+              .map(id => {
+                return response.data.find(appointment => appointment.user._id === id).user;
+              });
+          
+              setUsers(uniqueUsers);
             }
 
           } else {

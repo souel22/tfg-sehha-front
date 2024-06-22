@@ -17,6 +17,7 @@ const AppointmentList = ({ appointments, onJoin, onCancel }) => {
               userName={appointment.user.firstName + " " + appointment.user.lastName}
               date={appointment.date}
               duration={appointment.duration}
+              status={appointment.status}
               onJoin={onJoin}
               onCancel={onCancel}
             />

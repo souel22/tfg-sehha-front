@@ -126,21 +126,30 @@ async function hangup() {
     localStream.getTracks().forEach(track => track.stop());
     localStream = null;
   }
+
+  // Clear the video elements
+  if (localVideo.current) {
+    localVideo.current.srcObject = null;
+  }
+  if (remoteVideo.current) {
+    remoteVideo.current.srcObject = null;
+  }
 }
 
 function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
-  const handleStartButtonutton = useRef(null);
+  const startButton = useRef(null);
   const hangupButton = useRef(null);
   const muteAudButton = useRef(null);
   const muteVidButton = useRef(null);
   const localVideo = useRef(null);
   const remoteVideo = useRef(null);
+  const [audiostate, setAudio] = useState(true);
+  const [videostate, setVideo] = useState(true);
+  const [started, setStarted] = useState(false)
   const { user: authenticatedUser } = useAuthContext();  // Access the authenticated user
-  const [token, setToken] = useState(null);
 
   useEffect(() => {
     if (authenticatedUser) {
-      setToken(authenticatedUser.token);
       console.log('Authenticated user token:', authenticatedUser.token);
 
       console.log('Component mounted');
@@ -178,7 +187,7 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
           case 'bye':
             console.log('Handling bye');
             if (pc) {
-              hangup();
+              handleHangUpButton()
             }
             break;
           default:
@@ -189,12 +198,11 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
 
       hangupButton.current.disabled = true;
       muteAudButton.current.disabled = true;
+      muteVidButton.current.disabled = true;
+      startButton.current.disabled = false;
     }
 
   }, [appointmentId, userId, specialistId, socket, authenticatedUser]);
-
-  const [audiostate, setAudio] = useState(false);
-  const [videostate, setVideo] = useState(false);
 
   const handleStartButton = async () => {
     console.log('Starting call with appointmentId:', appointmentId);
@@ -204,12 +212,14 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     } catch (err) {
       console.error('Error while getting local media stream:', err);
     }
-    handleStartButtonutton.current.disabled = true;
-    hangupButton.current.disabled = false;
-    muteAudButton.current.disabled = false;
     const message = { type: 'ready', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending ready:', message);
     socket.emit('message', message);
+        startButton.current.disabled = true;
+    hangupButton.current.disabled = false;
+    muteAudButton.current.disabled = false;
+    muteVidButton.current.disabled = false;
+    setStarted(true)
   };
 
   const handleHangUpButton = async () => {
@@ -218,15 +228,26 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     const message = { type: 'bye', token: authenticatedUser.token, room: appointmentId };
     console.log('Sending bye:', message);
     socket.emit('message', message);
+    startButton.current.disabled = false;
+    hangupButton.current.disabled = true;
+    muteAudButton.current.disabled = true;
+    muteVidButton.current.disabled = true;
+    if (localVideo.current.classList.contains('big-video')){
+      localVideo.current.classList.remove('big-video');
+      localVideo.current.classList.add('small-video');
+      remoteVideo.current.classList.remove('small-video');
+      remoteVideo.current.classList.add('big-video');
+    }
+    setStarted(false)
   };
 
   function muteAudio() {
     console.log('Toggling audio mute');
     if (audiostate) {
-      localVideo.current.muted = true;
+      localStream.getAudioTracks().forEach(track => track.enabled = false);
       setAudio(false);
     } else {
-      localVideo.current.muted = false;
+      localStream.getAudioTracks().forEach(track => track.enabled = true);
       setAudio(true);
     }
   }
@@ -242,19 +263,34 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
     }
   }
 
+  const toggleVideos = () => {
+    if (localVideo.current.classList.contains('big-video')) {
+      localVideo.current.classList.remove('big-video');
+      localVideo.current.classList.add('small-video');
+      remoteVideo.current.classList.remove('small-video');
+      remoteVideo.current.classList.add('big-video');
+    } else {
+      localVideo.current.classList.remove('small-video');
+      localVideo.current.classList.add('big-video');
+      remoteVideo.current.classList.remove('big-video');
+      remoteVideo.current.classList.add('small-video');
+    }
+  };
+
+
   return (
     <Container className='consultation-options'>
       <Row className='video bg-main'>
-        <Col>
-          <video ref={localVideo} className='video-item' autoPlay playsInline></video>
-        </Col>
-        <Col>
-          <video ref={remoteVideo} className='video-item' autoPlay playsInline></video>
+      <Col>
+          <div className="video-container">
+            <video ref={remoteVideo} className='video-item big-video' autoPlay playsInline onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
+            <video ref={localVideo} className='video-item small-video' autoPlay playsInline muted onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
+          </div>
         </Col>
       </Row>
       <Row className='btn'>
         <Col className='d-flex justify-content-center'>
-          <Button className='btn-start' ref={handleStartButtonutton} onClick={handleStartButton}>Start</Button>
+          <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>
           <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button>
           {videostate ?
             <Button className='btn-start' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
