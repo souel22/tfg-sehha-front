@@ -281,12 +281,10 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
   return (
     <Container className='consultation-options'>
       <Row className='video bg-main'>
-      <Col>
           <div className="video-container">
             <video ref={remoteVideo} className='video-item big-video' autoPlay playsInline onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
             <video ref={localVideo} className='video-item small-video' autoPlay playsInline muted onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
           </div>
-        </Col>
       </Row>
       <Row className='btn'>
         <Col className='d-flex justify-content-center'>

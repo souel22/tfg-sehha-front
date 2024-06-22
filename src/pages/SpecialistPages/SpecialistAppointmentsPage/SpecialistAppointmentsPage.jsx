@@ -22,30 +22,22 @@ const SpecialistAppointmentsPage = () => {
     const fetchAppointments = async () => {
       if (authenticatedUser && authenticatedUser.specialist) {
         setSpecialist(authenticatedUser.specialist);
-         console.log("specialist: ", authenticatedUser.specialist); 
+        console.log("specialist: ", authenticatedUser.specialist);
         try {
           const path = import.meta.env.VITE_REACT_APP_APPOINTMENT_MANAGEMENT_API_APPOINTMENTS_PATH;
-
           if (baseUrl && path) {
             const url = `${baseUrl}${path}?specialist=${authenticatedUser.specialist.id}&sortPopulated=${sortPopulated}`;
-
-            const response = await axios.get(url, 
-              {
-                headers: { Authorization: `Bearer ${authenticatedUser.token}` }
-              }
-            );
-  
-
+            const response = await axios.get(url, {
+              headers: { Authorization: `Bearer ${authenticatedUser.token}` }
+            });
             if (response.data) {
               setAppointments(response.data); // Assuming the API returns an array of appointments
               const uniqueUsers = Array.from(new Set(response.data.map(appointment => appointment.user._id)))
-              .map(id => {
-                return response.data.find(appointment => appointment.user._id === id).user;
-              });
-          
+                .map(id => {
+                  return response.data.find(appointment => appointment.user._id === id).user;
+                });
               setUsers(uniqueUsers);
             }
-
           } else {
             console.error('API paths or baseUrl are not defined.');
           }
@@ -54,7 +46,6 @@ const SpecialistAppointmentsPage = () => {
         }
       }
     };
-
     fetchAppointments();
   }, [authenticatedUser, baseUrl, sortPopulated]);
 
@@ -113,7 +104,9 @@ const SpecialistAppointmentsPage = () => {
           }
         });
         const response = await axios.get(url, {
-          headers: { Authorization: `Bearer ${authenticatedUser.token}` }, params: filters });
+          headers: { Authorization: `Bearer ${authenticatedUser.token}` },
+          params: filters
+        });
         if (response.data) {
           setAppointments(response.data); // Assuming the API returns an array of appointments
         }
