@@ -281,22 +281,20 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
   return (
     <Container className='consultation-options'>
       <Row className='video bg-main'>
-          <div className="video-container">
-            <video ref={remoteVideo} className='video-item big-video' autoPlay playsInline onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
-            <video ref={localVideo} className='video-item small-video' autoPlay playsInline muted onClick={started? toggleVideos: ()=>{console.log("not started")}}></video>
+        <div className="video-container">
+          <video ref={remoteVideo} className='video-item big-video' autoPlay playsInline onClick={started ? toggleVideos : () => { console.log("not started") }}></video>
+          <video ref={localVideo} className='video-item small-video' autoPlay playsInline muted onClick={started ? toggleVideos : () => { console.log("not started") }}></video>
+          <div className="btns-container d-flex justify-content-center">
+            <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>
+            <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button>
+            {videostate ?
+              <Button className='btn-start' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
+              <Button className='btn-end' ref={muteVidButton} onClick={muteVideo}><FiVideoOff /></Button>}
+            {audiostate ?
+              <Button className='btn-start' ref={muteAudButton} onClick={muteAudio}><FiMic /></Button> :
+              <Button className='btn-end' ref={muteAudButton} onClick={muteAudio}><FiMicOff /></Button>}
           </div>
-      </Row>
-      <Row className='btn'>
-        <Col className='d-flex justify-content-center'>
-          <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>
-          <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button>
-          {videostate ?
-            <Button className='btn-start' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
-            <Button className='btn-end' ref={muteVidButton} onClick={muteVideo}><FiVideoOff /></Button>}
-          {audiostate ?
-            <Button className='btn-start' ref={muteAudButton} onClick={muteAudio}><FiMic /></Button> :
-            <Button className='btn-end' ref={muteAudButton} onClick={muteAudio}><FiMicOff /></Button>}
-        </Col>
+        </div>
       </Row>
       <Row className="chat-coming-soon">
         <Col>
