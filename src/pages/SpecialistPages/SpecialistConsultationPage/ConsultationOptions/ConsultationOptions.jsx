@@ -12,6 +12,11 @@ const servers = {
         'stun:stun2.l.google.com:19302',
       ],
     },
+    {
+      urls: 'turn:openrelay.metered.ca:80',
+      username: 'openrelayproject',
+      credential: 'openrelayproject'
+    }
   ],
   iceCandidatePoolSize: 10,
 };
@@ -174,8 +179,8 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
             console.log('Handling candidate');
             handleCandidate(e, appointmentId);
             break;
-          case 'create-room':
-          case 'join-room':
+          case 'room-created':
+          case 'room-joined':
             console.log('Room created or joined');
             if (pc) {
               console.log('Already in call, ignoring');

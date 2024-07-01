@@ -12,9 +12,20 @@ const servers = {
         'stun:stun2.l.google.com:19302',
       ],
     },
+    {
+      urls: 'turn:openrelay.metered.ca:80',
+      username: 'openrelayproject',
+      credential: 'openrelayproject'
+    },
+    {
+      urls: 'turn:openrelay.metered.ca:443',
+      username: 'openrelayproject',
+      credential: 'openrelayproject'
+    }
   ],
   iceCandidatePoolSize: 10,
 };
+
 
 let pc;
 let localStream;
@@ -174,8 +185,8 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
             console.log('Handling candidate');
             handleCandidate(e, appointmentId);
             break;
-          case 'create-room':
-          case 'join-room':
+          case 'room-created':
+          case 'room-joined':
             console.log('Room created or joined');
             if (pc) {
               console.log('Already in call, ignoring');
@@ -283,11 +294,11 @@ function ConsultationOptions({ appointmentId, userId, specialistId, socket }) {
             {started ? <Button className='btn-end' ref={hangupButton} onClick={handleHangUpButton}>Hang</Button> : 
             <Button className='btn-start' ref={startButton} onClick={handleStartButton}>Start</Button>}
             {videostate ?
-              <Button className='btn-start' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
-              <Button className='btn-end' ref={muteVidButton} onClick={muteVideo}><FiVideoOff /></Button>}
+              <Button className='btn-toggle' ref={muteVidButton} onClick={muteVideo}><FiVideo /></Button> :
+              <Button className='btn-toggle' ref={muteVidButton} onClick={muteVideo}><FiVideoOff /></Button>}
             {audiostate ?
-              <Button className='btn-start' ref={muteAudButton} onClick={muteAudio}><FiMic /></Button> :
-              <Button className='btn-end' ref={muteAudButton} onClick={muteAudio}><FiMicOff /></Button>}
+              <Button className='btn-toggle' ref={muteAudButton} onClick={muteAudio}><FiMic /></Button> :
+              <Button className='btn-toggle' ref={muteAudButton} onClick={muteAudio}><FiMicOff /></Button>}
           </div>
         </div>
       </Row>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Container, Row, Col, Form, Button, Alert, Collapse } from 'react-bootstrap';
 import Header from './Header/Header';
-import Footer from './Footer/Footer';
+import Footer from '../../../components/Footer/Footer';
 import SpecialistCalendar from './SpecialistCalendar/SpecialistCalendar';
 import axios from 'axios';
 import { useLogout } from '../../../hooks/useLogout';
