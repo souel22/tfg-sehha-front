@@ -14,15 +14,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuthContext } from './hooks/useAuthContext';
 import validateToken from './utils/validateToken';
 import { useLogout } from './hooks/useLogout';
-
 const App = () => {
   const { user: authenticatedUser } = useAuthContext();
   const { logout } = useLogout();
   const token = authenticatedUser?.token;
-
   const [isTokenValid, setIsTokenValid] = useState(false);
   const [userRole, setUserRole] = useState(null);
-
   useEffect(() => {
     if (token) {
       const decodedToken = validateToken(token);
@@ -41,13 +38,13 @@ const App = () => {
   if (!isTokenValid && authenticatedUser) {
     return <div>Loading...</div>;
   }
-
   return (
     <Router>
       <Routes>
         <Route
           path={import.meta.env.VITE_REACT_APP_HOMEPAGE}
-          element={!authenticatedUser ? <HomePage /> : (userRole === 'user' ? <Navigate to={import.meta.env.VITE_REACT_APP_USER_APPOINTMENTS_URL} /> : userRole === 'specialist' ? <Navigate to={import.meta.env.VITE_REACT_APP_SPECIALIST_APPOINTMENTS_URL} /> : logout())}
+          element={!authenticatedUser ? <HomePage /> : (userRole === 'user' ? <Navigate to={import.meta.env.VITE_REACT_APP_USER_APPOINTMENTS_URL} /> : userRole === 'specialist' ? 
+          <Navigate to={import.meta.env.VITE_REACT_APP_SPECIALIST_APPOINTMENTS_URL} /> : logout())}
         />
         <Route path={import.meta.env.VITE_REACT_APP_LOGIN_SIGNUP_SELECTION} element={!authenticatedUser ? <LoginSelectionPage /> : <Navigate to={import.meta.env.VITE_REACT_APP_HOMEPAGE} />} />
         <Route path={import.meta.env.VITE_REACT_APP_LOGIN} element={!authenticatedUser ? <LoginPage /> : <Navigate to={import.meta.env.VITE_REACT_APP_HOMEPAGE} />} />
